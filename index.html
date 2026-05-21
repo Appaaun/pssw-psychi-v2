@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Clinical Pharmacy Assistant จิตเวช — รพ.โพธิ์ศรีสุวรรณ</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0f2f5;--surface:#fff;--s2:#f8f9fb;--s3:#f0f4f8;
+  --border:#e4e8ee;--border2:#d0d6e0;
+  --text:#111827;--text2:#4b5563;--text3:#9ca3af;
+  --green:#0d6e3f;--green2:#15803d;--greenl:#ecfdf5;--greenb:#a7f3d0;--greenm:#059669;
+  --red:#991b1b;--redbg:#fef2f2;--redb:#fecaca;
+  --amber:#92400e;--amberbg:#fffbeb;--amberb:#fcd34d;
+  --r:10px;--rl:14px;
+  --font:'Sarabun',sans-serif;--mono:'IBM Plex Mono',monospace;
+  --sh:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --sh2:0 4px 16px rgba(0,0,0,.1),0 2px 4px rgba(0,0,0,.05);
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+header{background:var(--green);padding:0 2rem;height:60px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.hico{width:36px;height:36px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.htitle{font-size:16px;font-weight:600;color:#fff;line-height:1.2}
+.hsub{font-size:12px;color:rgba(255,255,255,.65)}
+.hbadge{margin-left:auto;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 14px;font-size:12px;color:#fff;white-space:nowrap}
+.pdot{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.wrap{max-width:980px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.steps{display:flex;align-items:center;margin-bottom:1.75rem;background:var(--surface);border-radius:var(--rl);padding:1rem 1.5rem;box-shadow:var(--sh)}
+.step{display:flex;align-items:center;gap:9px;flex:1}
+.snum{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;background:var(--s2);color:var(--text3);border:2px solid var(--border);transition:all .2s}
+.step.active .snum{background:var(--green);color:#fff;border-color:var(--green)}
+.step.done .snum{background:var(--greenl);color:var(--green);border-color:var(--greenb)}
+.slbl{font-size:13px;color:var(--text3);transition:all .2s}
+.step.active .slbl{color:var(--text);font-weight:600}
+.step.done .slbl{color:var(--green)}
+.sline{flex:1;height:1px;background:var(--border);margin:0 10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;align-items:start}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);box-shadow:var(--sh);margin-bottom:1.25rem}
+.card:last-child{margin-bottom:0}
+.ch{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.cico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cig{background:var(--greenl)}.cib{background:#eff6ff}.cia{background:var(--amberbg)}
+.ctitle{font-size:14px;font-weight:600;color:var(--text)}
+.csub{font-size:12px;color:var(--text3);margin-top:1px}
+.cb{padding:1.25rem}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.frow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.field{margin-bottom:1rem}.field:last-child{margin-bottom:0}
+label.lbl{font-size:13px;color:var(--text2);display:block;margin-bottom:5px;font-weight:500}
+input[type=text],input[type=number],select,textarea{
+  width:100%;font-family:var(--font);font-size:14px;color:var(--text);
+  background:var(--s2);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:9px 12px;outline:none;transition:all .15s;appearance:none
+}
+input:focus,select:focus,textarea:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 3px rgba(13,110,63,.1)}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:32px}
+textarea{min-height:80px;resize:vertical;line-height:1.6}
+.sglbl{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.sgb{padding:3px 10px;border-radius:5px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.sgd{background:var(--redbg);color:var(--red)}
+.sgw{background:var(--amberbg);color:var(--amber)}
+.sgn{background:var(--s3);color:var(--text3)}
+.sgg{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:4px}
+.ci{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;border:1.5px solid transparent;cursor:pointer;font-size:13px;color:var(--text);transition:all .12s;line-height:1.35}
+.ci:hover{border-color:var(--border2);background:var(--s2)}
+.ci.di:hover{border-color:var(--redb);background:var(--redbg)}
+.ci.wi:hover{border-color:var(--amberb);background:var(--amberbg)}
+.ci input[type=checkbox]{width:15px;height:15px;accent-color:var(--green);flex-shrink:0;cursor:pointer}
+.sdiv{height:1px;background:var(--border);margin:12px 0}
+.dsearch{position:relative}
+.ddrop{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:1.5px solid var(--greenb);border-radius:var(--r);z-index:200;max-height:220px;overflow-y:auto;box-shadow:var(--sh2)}
+.dopt{padding:9px 13px;font-size:13px;cursor:pointer;color:var(--text);border-bottom:1px solid var(--border);transition:background .1s}
+.dopt:hover{background:var(--greenl)}.dopt:last-child{border-bottom:none}
+.dtags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.dtag{display:inline-flex;align-items:center;gap:6px;background:var(--greenl);color:var(--green);border:1.5px solid var(--greenb);border-radius:20px;padding:4px 12px;font-size:13px;font-weight:500}
+.dtx{cursor:pointer;font-size:16px;line-height:1;opacity:.5;transition:opacity .1s}.dtx:hover{opacity:1}
+.addb{padding:9px 16px;font-family:var(--font);font-size:13px;font-weight:600;color:var(--green);background:var(--greenl);border:1.5px solid var(--greenb);border-radius:var(--r);cursor:pointer;white-space:nowrap;transition:all .12s;flex-shrink:0}
+.addb:hover{background:#d1fae5}
+.disc{background:var(--amberbg);border:1.5px solid var(--amberb);border-radius:var(--r);padding:12px 16px;display:flex;gap:10px;align-items:flex-start;margin-top:1.25rem}
+.disc p{font-size:13px;color:var(--amber);line-height:1.55}
+.btngo{width:100%;margin-top:1.25rem;padding:14px;font-family:var(--font);font-size:16px;font-weight:600;color:#fff;background:var(--green);border:none;border-radius:var(--rl);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .15s;box-shadow:0 3px 10px rgba(13,110,63,.35)}
+.btngo:hover{background:var(--green2);box-shadow:0 5px 18px rgba(13,110,63,.45);transform:translateY(-1px)}
+.btngo:active{transform:translateY(0)}
+.btngo:disabled{background:var(--text3);box-shadow:none;transform:none;cursor:not-allowed}
+.ldiv{display:none;text-align:center;padding:3rem 0;margin-top:1.5rem}
+.lring{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ldiv p{font-size:14px;color:var(--text2)}
+.rdiv{display:none;margin-top:2rem}
+.rhead{background:var(--green);border-radius:var(--rl) var(--rl) 0 0;padding:1rem 1.5rem;display:flex;align-items:center;gap:10px}
+.rhead p{font-size:15px;font-weight:600;color:#fff}
+.rtime{margin-left:auto;font-size:12px;color:rgba(255,255,255,.8);font-family:var(--mono);background:rgba(255,255,255,.15);padding:3px 12px;border-radius:20px}
+.rbody{background:var(--surface);border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--rl) var(--rl);padding:1.5rem;font-size:14px;line-height:1.9;color:var(--text)}
+.rfooter{display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 14px;background:var(--s2);border:1px solid var(--border);border-radius:var(--r)}
+.rfooter p{font-size:12px;color:var(--text3)}
+.rlog{font-family:var(--mono);font-size:11px;color:var(--text3);margin-left:auto}
+footer{text-align:center;padding:1.5rem;border-top:1px solid var(--border);background:var(--surface);margin-top:3rem}
+footer p{font-size:12px;color:var(--text3)}
+footer span{color:var(--text2);font-weight:600}
+.sym-row{display:flex;flex-direction:column;gap:4px}
+.sym-row .sym-date{font-size:12px;padding:5px 8px;border-radius:6px;border:1.5px solid var(--greenb);background:var(--greenl);color:var(--green);width:100%}
+.tlsec{background:var(--greenl);border:1.5px solid var(--greenb);border-radius:var(--rl);padding:1rem 1.25rem;margin:12px 0 16px}
+.tlsec-title{font-size:12px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.tlwrap{overflow-x:auto;padding:4px 0 12px}
+.tl{display:flex;align-items:flex-start;min-width:max-content;padding:0 4px}
+.tlitem{display:flex;flex-direction:column;align-items:center;position:relative;min-width:130px;padding:0 8px}
+.tlitem:not(:last-child)::after{content:'';position:absolute;top:13px;left:calc(50% + 14px);right:calc(-50% + 14px);height:2px;background:linear-gradient(90deg,var(--green),var(--greenb))}
+.tldot{width:26px;height:26px;border-radius:50%;background:var(--green);border:3px solid var(--greenb);display:flex;align-items:center;justify-content:center;z-index:1;flex-shrink:0}
+.tltime{font-size:11px;font-weight:700;color:var(--green);margin-top:8px;font-family:var(--mono);text-align:center}
+.tlact{font-size:12px;color:var(--text2);text-align:center;margin-top:3px;max-width:120px;line-height:1.4}
+.tldrug{font-size:11px;color:var(--green-m);font-weight:600;text-align:center;margin-top:2px;max-width:120px;line-height:1.3}
+@media(max-width:680px){
+  header{padding:0 1rem}.hbadge{display:none}
+  .wrap{padding:1.25rem 1rem 4rem}
+  .grid{grid-template-columns:1fr}
+  .frow2,.frow3{grid-template-columns:1fr}
+  .sgg{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="hico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
+  <div><div class="htitle">Clinical Pharmacy Assistant — จิตเวช</div><div class="hsub">Side Effect Management · โรงพยาบาลโพธิ์ศรีสุวรรณ</div></div>
+  <div class="hbadge"><div class="pdot"></div>AI พร้อมใช้งาน</div>
+</header>
+
+<div class="wrap">
+  <div class="steps">
+    <div class="step active" id="step1"><div class="snum">1</div><div class="slbl">ข้อมูลผู้ป่วย</div></div>
+    <div class="sline"></div>
+    <div class="step" id="step2"><div class="snum">2</div><div class="slbl">ยาและอาการ</div></div>
+    <div class="sline"></div>
+    <div class="step" id="step3"><div class="snum">3</div><div class="slbl">ผลวิเคราะห์</div></div>
+  </div>
+
+  <div class="grid">
+    <!-- LEFT -->
+    <div>
+      <div class="card">
+        <div class="ch">
+          <div class="cico cig"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="ctitle">ข้อมูลผู้ป่วย</div><div class="csub">กรอกข้อมูลพื้นฐาน</div></div>
+        </div>
+        <div class="cb">
+          <div class="field frow3">
+            <div><label class="lbl" for="age">อายุ (ปี)</label><input type="number" id="age" placeholder="45" min="1" max="120"/></div>
+            <div><label class="lbl" for="weight">น้ำหนัก (กก.)</label><input type="number" id="weight" placeholder="60" min="1"/></div>
+            <div><label class="lbl" for="gender">เพศ</label>
+              <select id="gender"><option value="">เลือก</option><option>ชาย</option><option>หญิง</option></select>
+            </div>
+          </div>
+          <div class="field frow2">
+            <div><label class="lbl" for="comorbid">โรคประจำตัว</label><input type="text" id="comorbid" placeholder="เช่น CKD, DM"/></div>
+            <div><label class="lbl" for="special">ภาวะพิเศษ</label>
+              <select id="special">
+                <option value="">ไม่มี</option><option>ตั้งครรภ์</option><option>ให้นมบุตร</option>
+                <option>ผู้สูงอายุ (&gt;65 ปี)</option><option>ไตบกพร่อง</option><option>ตับบกพร่อง</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ch">
+          <div class="cico cib"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
+          <div><div class="ctitle">ยาที่ผู้ป่วยใช้อยู่</div><div class="csub">ระบุวันเริ่มยา เพื่อวิเคราะห์ Timeline S/E</div></div>
+        </div>
+        <div class="cb">
+          <div class="field">
+            <label class="lbl">รายการยาทั้งหมด</label>
+            <div class="dsearch" style="margin-bottom:8px"><input type="text" id="med-search" placeholder="พิมพ์ชื่อยาเพื่อค้นหา..." autocomplete="off"/><div class="ddrop" id="med-dropdown"></div></div>
+            <div style="display:grid;grid-template-columns:1fr 80px 110px 110px auto;gap:6px;align-items:center;margin-bottom:10px">
+              <div style="font-size:13px;color:var(--text3);padding:0 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="med-selected-name">— เลือกยาด้านบนก่อน —</div>
+              <input type="number" id="med-dose" placeholder="ขนาด" min="0" step="any" style="text-align:center"/>
+              <select id="med-unit"><option value="mg/day">mg/day</option><option value="mg/month">mg/month</option><option value="mg/week">mg/week</option><option value="mg/dose">mg/dose</option><option value="mcg/day">mcg/day</option><option value="unit/day">unit/day</option></select>
+              <input type="date" id="med-start" title="วันที่เริ่มยา" style="font-size:12px;padding:8px 6px"/>
+              <button class="addb" type="button" onclick="addMed()">+ เพิ่ม</button>
+            </div>
+            <div class="dtags" id="med-tags"></div>
+            <input type="hidden" id="meds"/>
+            <div id="med-history-tl" style="display:none;margin-top:12px;background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px">
+              <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px">📅 Timeline ประวัติยา vs S/E onset</div>
+              <div id="med-history-tl-content"></div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="lbl">ยาที่สงสัยว่าเป็นสาเหตุ</label>
+            <div class="dsearch">
+              <input type="text" id="suspect" placeholder="พิมพ์ชื่อยาที่สงสัย..." autocomplete="off"/>
+              <div class="ddrop" id="suspect-dropdown"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div>
+      <div class="card">
+        <div class="ch">
+          <div class="cico cia"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div><div class="ctitle">อาการที่พบ</div><div class="csub">เลือกได้หลายข้อ</div></div>
+        </div>
+        <div class="cb">
+          <div class="sglbl"><span class="sgb sgd">ฉุกเฉิน / รุนแรง</span></div>
+          <div class="sgg">
+            <div class="sym-row di"><label class="ci di"><input type="checkbox" class="symptom" value="Neuroleptic Malignant Syndrome (NMS)" onchange="toggleDate(this)"/> NMS</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row di"><label class="ci di"><input type="checkbox" class="symptom" value="Serotonin Syndrome" onchange="toggleDate(this)"/> Serotonin Syndrome</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row di"><label class="ci di"><input type="checkbox" class="symptom" value="Acute Dystonia" onchange="toggleDate(this)"/> Acute Dystonia</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row di"><label class="ci di"><input type="checkbox" class="symptom" value="Agranulocytosis" onchange="toggleDate(this)"/> Agranulocytosis</label><input type="date" class="sym-date" style="display:none"/></div>
+          </div>
+          <div class="sdiv"></div>
+          <div class="sglbl"><span class="sgb sgw">EPS / การเคลื่อนไหว</span></div>
+          <div class="sgg">
+            <div class="sym-row wi"><label class="ci wi"><input type="checkbox" class="symptom" value="Acute Akathisia" onchange="toggleDate(this)"/> Acute Akathisia</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row wi"><label class="ci wi"><input type="checkbox" class="symptom" value="Parkinsonism" onchange="toggleDate(this)"/> Parkinsonism</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row wi"><label class="ci wi"><input type="checkbox" class="symptom" value="Tardive Dyskinesia" onchange="toggleDate(this)"/> Tardive Dyskinesia</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row wi"><label class="ci wi"><input type="checkbox" class="symptom" value="กล้ามเนื้อแข็ง / สั่น" onchange="toggleDate(this)"/> กล้ามเนื้อแข็ง / สั่น</label><input type="date" class="sym-date" style="display:none"/></div>
+          </div>
+          <div class="sdiv"></div>
+          <div class="sglbl"><span class="sgb sgn">อาการทั่วไป</span></div>
+          <div class="sgg">
+            <div class="sym-row"><label class="ci"><input type="checkbox" class="symptom" value="ง่วงซึม / ซึมมาก" onchange="toggleDate(this)"/> ง่วงซึม / ซึมมาก</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row"><label class="ci"><input type="checkbox" class="symptom" value="น้ำหนักขึ้น" onchange="toggleDate(this)"/> น้ำหนักขึ้น</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row"><label class="ci"><input type="checkbox" class="symptom" value="ความดันต่ำเมื่อลุกยืน" onchange="toggleDate(this)"/> ความดันต่ำเมื่อลุกยืน</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row"><label class="ci"><input type="checkbox" class="symptom" value="QTc prolongation" onchange="toggleDate(this)"/> QTc prolongation</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row"><label class="ci"><input type="checkbox" class="symptom" value="Metabolic syndrome" onchange="toggleDate(this)"/> Metabolic syndrome</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row"><label class="ci"><input type="checkbox" class="symptom" value="น้ำลายไหล (Hypersalivation)" onchange="toggleDate(this)"/> น้ำลายไหล</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row"><label class="ci"><input type="checkbox" class="symptom" value="ปากแห้ง / คอแห้ง (Xerostomia)" onchange="toggleDate(this)"/> ปากแห้ง / คอแห้ง</label><input type="date" class="sym-date" style="display:none"/></div>
+            <div class="sym-row"><label class="ci"><input type="checkbox" class="symptom" value="อื่นๆ" onchange="toggleDate(this)"/> อื่นๆ</label><input type="date" class="sym-date" style="display:none"/></div>
+          </div>
+          <div class="sdiv"></div>
+          <div class="field">
+            <label class="lbl">รายละเอียดอาการเพิ่มเติม</label>
+            <textarea id="detail" placeholder="อธิบายอาการที่พบ ระยะเวลา ความรุนแรง..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="disc">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <p>คำแนะนำที่ได้รับเป็นข้อมูลสนับสนุนการตัดสินใจทางคลินิก ไม่ใช่คำสั่งการรักษา ควรยืนยันกับเภสัชกรเมื่อมีโอกาส</p>
+  </div>
+
+  <button class="btngo" id="analyze-btn" onclick="analyze()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    วิเคราะห์ข้อมูล
+  </button>
+
+  <div class="ldiv" id="loading-area">
+    <div class="lring"></div>
+    <p>กำลังวิเคราะห์โดย AI เภสัชกร...</p>
+  </div>
+
+  <div class="rdiv" id="result-area">
+    <div class="rhead">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+      <p>ผลการวิเคราะห์ Clinical Pharmacy AI</p>
+      <div class="rtime" id="result-time"></div>
+    </div>
+    <div id="timeline-area" style="display:none">
+      <div class="tlsec">
+        <div class="tlsec-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Timeline การจัดการ
+        </div>
+        <div class="tlwrap"><div class="tl" id="timeline-content"></div></div>
+      </div>
+    </div>
+    <div class="rbody" id="result-content"></div>
+    <div class="rfooter">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <p>อ้างอิง: Micromedex · Maudsley 14th ed. · Stahl's 5th ed. · แนวทางกรมสุขภาพจิต · NLEM 2567</p>
+      <div style="display:flex;align-items:center;gap:6px;margin-left:auto">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span style="font-size:11px;color:#6b7280">บันทึก Sheets แล้ว</span>
+        <div class="rlog" id="log-id"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>พัฒนาโดย <span>เภสัชกร เมธี แสนการุณ</span> · โรงพยาบาลโพธิ์ศรีสุวรรณ</p>
+</footer>
+
+<script>
+const DRUG_LIST=["Amitriptyline 10 mg","Amitriptyline 25 mg","Baclofen 10 mg","Trihexyphenidyl 2 mg","Trihexyphenidyl 5 mg","Carbamazepine 200 mg","Chlorpromazine 25 mg","Chlorpromazine 50 mg","Chlorpromazine 100 mg","Clonazepam 0.5 mg","Clonazepam 2 mg","Clozapine 100 mg","Diazepam 2 mg","Diazepam 5 mg","Diazepam 5 mg/ml inj, 2 mL","Dipotassium clorazepate 5 mg","Fluoxetine 20 mg","Fluphenazine 25 mg/mL inj, 1 mL","Flupentixol decanoate 20 mg/mL inj, 1 mL","Gabapentin 100 mg","Gabapentin 300 mg","Haloperidol 0.5 mg","Haloperidol 2 mg","Haloperidol 5 mg","Haloperidol 5 mg/mL inj, 1 mL","Haloperidol decanoate 50 mg/ml inj, 1 mL","Levodopa 250 mg+Carbidopa 25 mg","Lorazepam 0.5 mg","Lorazepam 1 mg","Methylphenidate 10 mg","Midazolam 15 mg/3 mL inj","Morphine sulphate SR 10 mg","Morphine sulphate SR 30 mg","Nortriptyline 25 mg","Perphenazine 4 mg","Perphenazine 8 mg","Phenobarbital 30 mg","Phenobarbital 60 mg","Phenytoin 100 mg","Phenytoin 50 mg/mL inj, 5 mL","Quetiapine 200 mg","Risperidone 1 mg","Risperidone 2 mg","Sertraline HCl 50 mg","Sodium valproate 200 mg","Sodium valproate Chrono 200 mg","Sodium valproate Chrono 500 mg","Thioridazine 50 mg","Tramadol 50 mg","Tramadol 50 mg/mL inj, 1 mL","Trazodone 50 mg","Acyclovir 400 mg","Adrenaline 1 mg/mL inj, 1 mL","Allopurinol 100 mg","Amlodipine 10 mg","Amoxycillin 250 mg","Amoxycillin 500 mg","Aspirin 81 mg","Aspirin 300 mg","Atorvastatin 40 mg","Atropine 0.6 mg/mL inj, 1 mL","Captopril 25 mg","Cetirizine 10 mg","Ciprofloxacin 250 mg","Colchicine 0.6 mg","Clopidogrel 75 mg","Co-trimoxazole 480 mg","Dexamethasone 4 mg/mL inj, 1 mL","Digoxin 0.0625 mg","Domperidone 10 mg","Doxycycline 100 mg","Enalapril 5 mg","Famotidine 20 mg","Folic acid 5 mg","Furosemide 40 mg","Glipizide 5 mg","Hydrochlorothiazide 25 mg","Hydroxychloroquine 200 mg","Ibuprofen 400 mg","Insulin (30/70) 100 iu/mL inj","Insulin (regular) 100 iu/mL inj","Levofloxacin 500 mg","Loperamide HCL 2 mg","Losartan 50 mg","Metformin 500 mg","Methimazole 5 mg","Methyldopa 250 mg","Metoclopramide 5 mg/mL inj, 2 mL","Metoprolol 100 mg","Metronidazole 200 mg","Morphine sulphate 10 mg/mL inj","Naproxen 250 mg","Omeprazole 20 mg","Oseltamivir 75 mg","Paracetamol 325 mg","Paracetamol 500 mg","Pioglitazone HCL 30 mg","Potassium chloride 500 mg","Prednisolone 5 mg","Propanolol 10 mg","Salbutamol 2 mg","Simvastatin 20 mg","Spironolactone 25 mg","Thyroxine 100 mcg","Verapamil 40 mg","Warfarin 2 mg","Warfarin 3 mg","Warfarin 5 mg"];
+let selMeds=[];
+function setupAC(iid,did,multi){
+  const inp=document.getElementById(iid),drop=document.getElementById(did);
+  inp.addEventListener('input',()=>{
+    const q=inp.value.trim().toLowerCase();
+    if(!q){drop.style.display='none';return;}
+    const hits=DRUG_LIST.filter(d=>d.toLowerCase().includes(q)).slice(0,10);
+    if(!hits.length){drop.style.display='none';return;}
+    drop.innerHTML=hits.map(m=>`<div class="dopt" onclick="pick('${iid}','${did}','${m.replace(/'/g,"\\'")}',${multi})">${m}</div>`).join('');
+    drop.style.display='block';
+  });
+  document.addEventListener('click',e=>{if(!inp.contains(e.target)&&!drop.contains(e.target))drop.style.display='none';});
+}
+function pick(iid,did,val,multi){
+  document.getElementById(did).style.display='none';
+  document.getElementById(iid).value=val;
+  if(multi){
+    document.getElementById('med-selected-name').textContent=val;
+    document.getElementById('med-selected-name').style.color='var(--text)';
+    // auto-select unit based on drug name
+    const unit=document.getElementById('med-unit');
+    if(val.toLowerCase().includes('inj')&&val.toLowerCase().includes('ml')){
+      unit.value='mg/month';
+    } else if(val.toLowerCase().includes('mcg')){
+      unit.value='mcg/day';
+    } else {
+      unit.value='mg/day';
+    }
+    document.getElementById('med-dose').focus();
+  }
+}
+function addMed(){
+  const inp=document.getElementById('med-search'),val=inp.value.trim();
+  const dose=document.getElementById('med-dose').value.trim();
+  const unit=document.getElementById('med-unit').value;
+  const startDate=document.getElementById('med-start').value;
+  if(!val){alert('กรุณาเลือกยาก่อน');return;}
+  const entry=dose?`${val} ${dose} ${unit}`:val;
+  const key=val;
+  if(selMeds.find(m=>m.key===key)){inp.value='';return;}
+  selMeds.push({key,label:entry,dose:dose?`${dose} ${unit}`:'',startDate});
+  renderTags();renderMedTimeline();
+  inp.value='';
+  document.getElementById('med-dose').value='';
+  document.getElementById('med-start').value='';
+  document.getElementById('med-selected-name').textContent='— เลือกยาด้านบนก่อน —';
+  document.getElementById('med-selected-name').style.color='var(--text3)';
+  document.getElementById('med-dropdown').style.display='none';
+  tick();
+}
+function removeMed(k){selMeds=selMeds.filter(m=>m.key!==k);renderTags();renderMedTimeline();tick();}
+function renderTags(){
+  document.getElementById('med-tags').innerHTML=selMeds.map(m=>{
+    const dateStr=m.startDate?` · เริ่ม ${formatDate(m.startDate)}`:'';
+    return `<span class="dtag">${m.label}${dateStr}<span class="dtx" onclick="removeMed('${m.key.replace(/'/g,"\\'")}')">×</span></span>`;
+  }).join('');
+  document.getElementById('meds').value=selMeds.map(m=>{
+    const d=m.startDate?` (เริ่ม ${formatDate(m.startDate)})`:'';
+    return m.label+d;
+  }).join(', ');
+}
+function formatDate(d){
+  if(!d)return'';
+  const [y,m,day]=d.split('-');
+  return `${day}/${m}/${parseInt(y)+543}`;
+}
+function renderMedTimeline(){
+  const area=document.getElementById('med-history-tl');
+  const hasDates=selMeds.some(m=>m.startDate);
+  if(!selMeds.length||!hasDates){area.style.display='none';return;}
+  const sorted=[...selMeds].filter(m=>m.startDate).sort((a,b)=>a.startDate.localeCompare(b.startDate));
+  const colors=['#0d6e3f','#2563eb','#7c3aed','#dc2626','#d97706','#0891b2'];
+  const firstSymDate=(()=>{const d=[...document.querySelectorAll('.sym-date')].map(i=>i.value).filter(Boolean).sort()[0];return d?formatDate(d):'S/E onset';})();
+  area.style.display='block';
+  document.getElementById('med-history-tl-content').innerHTML=`
+    <div class="tlwrap"><div class="tl">
+      ${sorted.map((m,i)=>`
+        <div class="tlitem">
+          <div class="tldot" style="background:${colors[i%colors.length]};border-color:${colors[i%colors.length]}40">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="12" cy="12" r="4" fill="#fff"/></svg>
+          </div>
+          <div class="tltime" style="color:${colors[i%colors.length]}">${formatDate(m.startDate)}</div>
+          <div class="tlact" style="font-weight:600;color:${colors[i%colors.length]}">${m.key.split(' ')[0]}</div>
+          <div class="tldrug">${m.dose||''}</div>
+        </div>
+      `).join('')}
+      <div class="tlitem">
+        <div class="tldot" style="background:var(--red);border-color:#fecaca">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="tltime" style="color:var(--red)">${firstSymDate}</div>
+        <div class="tlact" style="font-weight:600;color:var(--red)">เกิด S/E</div>
+        <div class="tldrug" style="color:var(--red)">⚠️ สังเกตยาก่อนหน้า</div>
+      </div>
+    </div></div>`;
+}
+function toggleDate(cb){
+  const dateInput=cb.closest('.sym-row').querySelector('.sym-date');
+  if(cb.checked){dateInput.style.display='block';dateInput.focus();}
+  else{dateInput.style.display='none';dateInput.value='';}
+  tick();
+}
+function getSymptoms(){
+  return [...document.querySelectorAll('.symptom:checked')].map(c=>{
+    const d=c.closest('.sym-row')?.querySelector('.sym-date')?.value;
+    return d?`${c.value} (พบ ${formatDate(d)})`:c.value;
+  });
+}
+function tick(){
+  document.getElementById('step1').className='step done';
+  document.getElementById('step2').className=(selMeds.length||document.querySelectorAll('.symptom:checked').length)?'step active':'step';
+}
+document.querySelectorAll('.symptom').forEach(c=>c.addEventListener('change',tick));
+document.addEventListener('DOMContentLoaded',()=>{
+  setupAC('med-search','med-dropdown',true);
+  setupAC('suspect','suspect-dropdown',false);
+  document.getElementById('med-search').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();document.getElementById('med-dose').focus();}});
+  document.getElementById('med-dose').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addMed();}});
+});
+const SYS=`เภสัชกรคลินิกจิตเวช ตอบภาษาไทย กระชับ ตรงประเด็น ไม่อธิบายฟุ่มเฟือย
+
+รูปแบบคำตอบ:
+
+⚠️ [ฉุกเฉิน/เร่งด่วน/ติดตามได้]
+🎯 สาเหตุ: [ยา] เพราะ [กลไก 1 บรรทัด] โอกาส [สูง/กลาง/ต่ำ] [ref]
+
+💊 ยาที่ให้
+| ยา | Dose | Route | Duration |
+|---|---|---|---|
+| ... | ... | ... | ... |
+
+🔄 ปรับยาเดิม: [หยุด/ลด X → เหตุผล] [ref]
+📋 ติดตาม: [bullet สั้น 2-3 ข้อ]
+🚩 ส่งต่อถ้า: [เกณฑ์ชัดเจน]
+📚 Ref: [สั้น]
+
+---TIMELINE_JSON---
+[{"time":"0 นาที","action":"...","drug":"..."},{"time":"15 นาที","action":"...","drug":""},{"time":"1 ชม.","action":"...","drug":""},{"time":"24 ชม.","action":"...","drug":""}]
+---END_TIMELINE---
+
+⚡ NMS/Serotonin/Agranulocytosis → "🚨 ฉุกเฉิน:" ก่อนเลย`;
+
+const SHEETS_URL='https://script.google.com/macros/s/AKfycbxAOxcyvK0zS4v5avtptt69FjPp7hqMXQiwuGAuvSiYQ9iWpMtSXw21EVlQMyTkMpifxg/exec';
+
+async function logToSheets(payload){
+  try{
+    await fetch(SHEETS_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
+  }catch(e){
+    console.warn('Log to Sheets failed:',e.message);
+  }
+}
+
+function parseAndRender(raw){
+  // extract timeline JSON
+  const tlMatch=raw.match(/---TIMELINE_JSON---\s*([\s\S]*?)\s*---END_TIMELINE---/);
+  let timelineData=null;
+  let text=raw;
+  if(tlMatch){
+    try{timelineData=JSON.parse(tlMatch[1]);}catch(e){}
+    text=raw.replace(/---TIMELINE_JSON---[\s\S]*?---END_TIMELINE---/,'').trim();
+  }
+  // render timeline
+  const tlArea=document.getElementById('timeline-area');
+  const tlContent=document.getElementById('timeline-content');
+  if(timelineData&&timelineData.length){
+    tlContent.innerHTML=timelineData.map((item,i)=>`
+      <div class="tlitem">
+        <div class="tldot">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="tltime">${item.time}</div>
+        <div class="tlact">${item.action}</div>
+        ${item.drug?`<div class="tldrug">${item.drug}</div>`:''}
+      </div>
+    `).join('');
+    tlArea.style.display='block';
+  } else {
+    tlArea.style.display='none';
+  }
+  return text;
+}
+
+function renderMD(raw){
+  const text=parseAndRender(raw);
+  const escaped=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lines=escaped.split('\n');
+  let html='';let inTable=false;let tableLines=[];
+  for(let i=0;i<lines.length;i++){
+    const line=lines[i];
+    const isTableRow=/^\s*\|/.test(line);
+    if(isTableRow){
+      if(!inTable){inTable=true;tableLines=[];}
+      tableLines.push(line);
+    } else {
+      if(inTable){html+=buildTable(tableLines);tableLines=[];inTable=false;}
+      const l=line
+        .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g,'<em>$1</em>');
+      html+=l+'<br/>';
+    }
+  }
+  if(inTable)html+=buildTable(tableLines);
+  return html;
+}
+function buildTable(rows){
+  let html='<table style="width:100%;border-collapse:collapse;margin:10px 0;font-size:13px">';
+  rows.forEach((row,i)=>{
+    if(/^\s*\|[-| :]+\|\s*$/.test(row))return;
+    const cells=row.split('|').filter((_,j,a)=>j>0&&j<a.length-1);
+    const tag=i===0?'th':'td';
+    const bg=i===0?'background:var(--green);color:#fff;':'background:'+(i%2===0?'var(--s2)':'#fff')+';';
+    html+=`<tr>${cells.map(c=>`<${tag} style="padding:7px 12px;border:1px solid var(--border);${bg}text-align:left">${c.trim()}</${tag}>`).join('')}</tr>`;
+  });
+  return html+'</table>';
+}
+
+async function analyze(){
+  const age=document.getElementById('age').value,weight=document.getElementById('weight').value,gender=document.getElementById('gender').value,comorbid=document.getElementById('comorbid').value,special=document.getElementById('special').value,meds=document.getElementById('meds').value.trim(),suspect=document.getElementById('suspect').value.trim(),detail=document.getElementById('detail').value.trim();
+  const symptoms=getSymptoms();
+  if(!meds){alert('กรุณาเพิ่มรายการยาที่ผู้ป่วยใช้อยู่');return;}
+  if(!symptoms.length){alert('กรุณาเลือกอาการที่พบอย่างน้อย 1 อาการ');return;}
+  const btn=document.getElementById('analyze-btn');
+  btn.disabled=true;
+  document.getElementById('loading-area').style.display='block';
+  document.getElementById('result-area').style.display='none';
+  document.getElementById('step2').className='step done';
+  document.getElementById('step3').className='step active';
+  const medTimeline=selMeds.filter(m=>m.startDate).sort((a,b)=>a.startDate.localeCompare(b.startDate)).map(m=>`${m.key} ${m.dose} (เริ่ม ${formatDate(m.startDate)})`).join(' → ');
+  const msg=`ข้อมูลผู้ป่วย:\n- อายุ: ${age||'ไม่ระบุ'} ปี | น้ำหนัก: ${weight||'ไม่ระบุ'} กก. | เพศ: ${gender||'ไม่ระบุ'}\n- โรคประจำตัว: ${comorbid||'ไม่มี'}\n- ภาวะพิเศษ: ${special||'ไม่มี'}\n\nยาที่ใช้อยู่: ${meds}\n${medTimeline?'ลำดับการเริ่มยา: '+medTimeline+'\n':''}ยาที่สงสัยเป็นสาเหตุ: ${suspect||'ไม่ระบุ'}\nอาการที่พบ: ${symptoms.join(', ')}\nรายละเอียดเพิ่มเติม: ${detail||'ไม่มี'}\n\nกรุณาวิเคราะห์โดยพิจารณา temporal relationship ระหว่างวันเริ่มยาและวันพบ S/E เพื่อช่วย identify causative drug`;
+  try{
+    const res=await fetch('/.netlify/functions/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:4096,system:SYS,messages:[{role:'user',content:msg}]})});
+    const data=await res.json();
+    const text=data.error?'เกิดข้อผิดพลาด: '+data.error.message:data.content?.map(b=>b.text||'').join('')||'ไม่สามารถวิเคราะห์ได้';
+    const now=new Date();
+    const logId='LOG-'+now.getTime().toString(36).toUpperCase();
+    const datetime=now.toLocaleString('th-TH',{dateStyle:'short',timeStyle:'short'});
+    document.getElementById('result-content').innerHTML=renderMD(text);
+    document.getElementById('result-time').textContent=now.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
+    document.getElementById('log-id').textContent=logId;
+    document.getElementById('result-area').style.display='block';
+    document.getElementById('step3').className='step done';
+    document.getElementById('result-area').scrollIntoView({behavior:'smooth',block:'start'});
+    if(!data.error){
+      logToSheets({
+        datetime,logId,
+        age:age||'ไม่ระบุ',
+        gender:gender||'ไม่ระบุ',
+        comorbid:comorbid||'ไม่มี',
+        meds,suspect:suspect||'ไม่ระบุ',
+        symptoms:symptoms.join(', '),
+        result:text.slice(0,2000)
+      });
+    }
+  }catch(e){
+    document.getElementById('result-content').textContent='เกิดข้อผิดพลาด: '+e.message;
+    document.getElementById('result-area').style.display='block';
+  }
+  document.getElementById('loading-area').style.display='none';
+  btn.disabled=false;
+}
+</script>
+</body>
+</html>
